@@ -2,27 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public string levelName;
-
-    public void StartGame()
+    [SerializeField]
+    private Image _progressBar;
+    // Start is called before the first frame update
+    public void StartButton()
     {
-        SceneManager.LoadSceneAsync(levelName);
+        StartCoroutine(LoadAsyncOperatiom());
     }
 
-    public void ObjectSelected()
+
+    IEnumerator LoadAsyncOperatiom()
     {
-        SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive);
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        gameLevel.allowSceneActivation = false; // stop the level from activating
+
+        while (gameLevel.progress < 0.9f)
+        {
+            _progressBar.fillAmount = gameLevel.progress;
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(3);
+
+        gameLevel.allowSceneActivation = true; // this will enter the level now
+        SceneManager.UnloadSceneAsync(0);
     }
-    
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-      //  if (collision.collider.gameObject.CompareTag("ReachedEnd"))
-        //{
-          //  Debug.Log("Finished Game");
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //}
-//    }
 }
