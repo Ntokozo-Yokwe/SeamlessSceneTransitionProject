@@ -8,16 +8,20 @@ public class SceneSwitcher : MonoBehaviour
 {
     [SerializeField]
     private Image _progressBar;
+    private bool isLoaded;
     // Start is called before the first frame update
     public void StartButton()
     {
-        StartCoroutine(LoadAsyncOperatiom());
+        if (isLoaded == false)
+        {
+            StartCoroutine(LoadAsyncOperatiom());
+            isLoaded = true;
+        }
     }
-
 
     IEnumerator LoadAsyncOperatiom()
     {
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
         gameLevel.allowSceneActivation = false; // stop the level from activating
 
         while (gameLevel.progress < 0.9f)
@@ -29,6 +33,6 @@ public class SceneSwitcher : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         gameLevel.allowSceneActivation = true; // this will enter the level now
-        SceneManager.UnloadSceneAsync(0);
+        //SceneManager.UnloadSceneAsync(0); // this does not work, need to find a proper unload script
     }
 }
