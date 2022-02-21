@@ -15,18 +15,10 @@ public class LoadSceneScript : MonoBehaviour
     {
         if(isLoaded == false)
         {
-            //scenesToLoad.Add(SceneManager.LoadSceneAsync("Scene2", LoadSceneMode.Additive));
             StartCoroutine(LoadingScreen());
         }
         isLoaded = true;
     }
-
-    //make a method for the object clicked scene switch to load the final scene and unload the first scene(SampleScene)
-    //public void FinalScene()
-    //{
-    //  Call functions that handle the fade out of the other objects and of the centering of pressed object
-    //  and the next scene should load the object with a fade in
-    //}
 
     IEnumerator LoadingScreen()
     {
@@ -44,9 +36,7 @@ public class LoadSceneScript : MonoBehaviour
                 yield return null;
             }
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         gameLevel.allowSceneActivation = true;
-        //SceneManager.UnloadSceneAsync("SampleScene");
     }
 }
-///////////////////---WE CAN DO THIS SCENE TRANSITION ON AWAKE---////////////////////////

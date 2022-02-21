@@ -595,8 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8101883be5fbe4bb7fe17d80d11e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 1755674197}
-  loadingInterface: {fileID: 678742697}
   loadingProgressBar: {fileID: 1279107197}
 --- !u!4 &914773456
 Transform:
@@ -1264,7 +1262,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848173901}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

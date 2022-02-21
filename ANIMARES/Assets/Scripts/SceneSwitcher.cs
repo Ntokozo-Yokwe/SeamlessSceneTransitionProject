@@ -9,7 +9,7 @@ public class SceneSwitcher : MonoBehaviour
     [SerializeField]
     private Image _progressBar;
     private bool isLoaded;
-    // Start is called before the first frame update
+
     public void StartButton()
     {
         if (isLoaded == false)
@@ -33,6 +33,10 @@ public class SceneSwitcher : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         gameLevel.allowSceneActivation = true; // this will enter the level now
-        //SceneManager.UnloadSceneAsync(0); // this does not work, need to find a proper unload script
+    }
+
+    public void LoadSceneOne()
+    {
+        SceneManager.LoadScene(0);
     }
 }
