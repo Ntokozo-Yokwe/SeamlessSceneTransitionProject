@@ -12,6 +12,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void StartButton()
     {
+        // ensure that we can only run this once
         if (isLoaded == false)
         {
             StartCoroutine(LoadAsyncOperatiom());
@@ -21,20 +22,24 @@ public class SceneSwitcher : MonoBehaviour
 
     IEnumerator LoadAsyncOperatiom()
     {
+        //load additive scene asychronously
         AsyncOperation gameLevel = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
-        gameLevel.allowSceneActivation = false; // stop the level from activating
+        // stop the level from activating
+        gameLevel.allowSceneActivation = false;
 
+        //see if scene has loaded
         while (gameLevel.progress < 0.9f)
         {
             _progressBar.fillAmount = gameLevel.progress;
             yield return new WaitForEndOfFrame();
         }
-
+        // pause the activation just so that we can add functionality to previous scene objects
         yield return new WaitForSeconds(3);
-
-        gameLevel.allowSceneActivation = true; // this will enter the level now
+        // this will enter the level now
+        gameLevel.allowSceneActivation = true; 
     }
 
+    //for the restart button (restart whole application)
     public void LoadSceneOne()
     {
         SceneManager.LoadScene(0);
